@@ -2,6 +2,8 @@
 import logging
 # импорт необходимых модулей из аиограма
 from aiogram import Bot, Dispatcher, executor, types
+# мопрт фильтров чатов
+from aiogram.dispatcher.filters import IDFilter
 
 
 API_TOKEN = 'вставь сюда токен бота от отца'
@@ -64,8 +66,10 @@ async def other_text(message: types.Message):
 
 
 # также можно встраивать назличные фильтры внутри хэндлера, для более точного определения на что реагировать
-# (по-умолчанию бот реагирует на личные сообщения и когда его тэгают в чате)
-@dp.message_handler(content_types=types.ContentType.VOICE)
+# (по-умолчанию бот реагирует на личные сообщения и когда его тэгают в чате),
+# при применении IDFilter можно указывать на каких конкретно пользователей он будет реагировать, варианты
+# с user_id (для личек пользователей) или chat_id (для конкретных чатов)
+@dp.message_handler(IDFilter(user_id=1234), content_types=types.ContentType.VOICE)
 async def other_text(message: types.Message):
     await message.answer("Ну нахуй ты рот открыл, один хер корона!")
 
