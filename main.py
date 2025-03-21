@@ -13,7 +13,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 from database import Base, DataBaseUtils
 from filters import ChatTypeFilter
 
-API_TOKEN = '7135012880:AAEpZ51oX4sxFtDx0nvZRZVTdRucFEkhTfQ'
+API_TOKEN = 'вставь сюда токен бота от отца'
 
 # логирование
 logging.basicConfig(level=logging.INFO)
@@ -121,12 +121,9 @@ async def starter():
             database=DataBaseUtils(session_maker=session_maker)
         )
     except KeyboardInterrupt:
-        pass
+        logs.warning('Application finished!')
 
 
 # это просто запуск аиограмма, если ты явно запускаешь этот файл
 if __name__ == '__main__':
-    try:
-        asyncio.run(starter())
-    except KeyboardInterrupt:
-        logs.warning('Application finished!')
+    asyncio.run(starter())
